@@ -1,0 +1,22 @@
+name: github 001
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 9 * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: sync
+        action: NullPointExceptionForEveryone/github-repository-copy-action@v1.0.0
+        with:
+          source_repository_url_list: ${{ vars.SOURCE_REPOSITORY_URL_LIST }}
+          source_repository_username: ${{ secrets.SOURCE_REPOSITORY_USERNAME }}
+          source_repository_password: ${{ secrets.SOURCE_REPOSITORY_PASSWORD }}
+          target_repository_url_list: ${{ vars.TARGET_REPOSITORY_URL_LIST }}
+          target_repository_username: ${{ secrets.TARGET_REPOSITORY_USERNAME }}
+          target_repository_password: ${{ secrets.TARGET_REPOSITORY_PASSWORD }}
